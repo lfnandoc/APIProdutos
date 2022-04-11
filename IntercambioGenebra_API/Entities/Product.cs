@@ -9,7 +9,7 @@ namespace IntercambioGenebraAPI.Entities
         public string? Name { get; set; }             
 
         [Column("price")]
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
 
         public Product() : base()
         {
