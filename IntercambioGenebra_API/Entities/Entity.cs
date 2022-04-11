@@ -1,4 +1,5 @@
 ﻿using IntercambioGenebraAPI.Infra.DB;
+using Swashbuckle.AspNetCore.Annotations;
 using System.Data;
 using System.Reflection;
 using System.Text;
@@ -7,6 +8,7 @@ namespace IntercambioGenebraAPI.Entities
 {
     public class Entity : IEntity
     {
+        [SwaggerSchema(ReadOnly = true)]
         [Column("id")]
         public int Id { get; set; }
 
