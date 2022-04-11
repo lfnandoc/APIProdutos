@@ -82,5 +82,19 @@ namespace IntercambioGenebraAPI.Controllers
 
             return BadRequest("Product could not be saved.");
         }
+
+        [HttpDelete("{id}", Name = "DeleteProduct")]
+        public IActionResult Delete(int id)
+        {
+            var product = new Product().GetById(id) as Product;
+
+            if (product == null)
+                return NotFound();
+
+            if (product.Delete())
+                return NoContent();
+
+            return BadRequest("Product could not be deleted.");
+        }
     }
 }
