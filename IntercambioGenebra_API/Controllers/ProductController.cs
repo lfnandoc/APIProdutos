@@ -20,5 +20,11 @@ namespace IntercambioGenebraAPI.Controllers
         {
             return new Product().GetAllMapped().OfType<Product>();
         }
+
+        [HttpGet("{id}", Name = "GetProductById")]
+        public Product? Get(int id)
+        {
+            return new Product().GetById(id) as Product;
+        }
     }
 }
