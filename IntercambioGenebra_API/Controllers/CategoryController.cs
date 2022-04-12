@@ -1,4 +1,5 @@
 using IntercambioGenebraAPI.Entities;
+using IntercambioGenebraAPI.Payloads;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IntercambioGenebraAPI.Controllers
@@ -28,36 +29,32 @@ namespace IntercambioGenebraAPI.Controllers
         }
 
         [HttpPost(Name = "AddCategory")]
-        public IActionResult Post(Category Category)
+        public IActionResult Post(CategoryPayload category)
         {
-            var userSubmittedId = Category.Id != -2;
-
-            if (userSubmittedId)
-                return BadRequest("Custom Category ids are not allowed.");
-
-            var invalidCategoryName = Category.Name == null || string.IsNullOrWhiteSpace(Category.Name);
+            var invalidCategoryName = category.Name == null || string.IsNullOrWhiteSpace(category.Name);
 
             if (invalidCategoryName)
-                return BadRequest("Invalid Category name.");         
+                return BadRequest("Invalid Category name.");
 
-            if (Category.Save())
-                return CreatedAtRoute("GetCategoryById", new { id = Category.Id }, Category);
+
+            var categoryEntity = new Category()
+            {
+                Name = category.Name
+            };
+
+            if (categoryEntity.Save())
+                return CreatedAtRoute("GetCategoryById", new { id = categoryEntity.Id }, categoryEntity);
 
             return BadRequest("Category could not be saved.");
         }
 
         [HttpPut("{id}", Name = "UpdateCategory")]
-        public IActionResult Put(int id, Category submittedCategory)
+        public IActionResult Put(int id, CategoryPayload submittedCategory)
         {
             var existingCategory = new Category().GetById(id) as Category;
 
             if (existingCategory == null)
                 return NotFound();
-
-            var userSubmittedId = submittedCategory.Id != -2;
-
-            if (userSubmittedId)
-                return BadRequest("Updating Category ids is not allowed.");
 
             var newCategoryName = submittedCategory.Name != null;
             
