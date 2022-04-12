@@ -25,7 +25,12 @@ namespace IntercambioGenebraAPI.Controllers
         [HttpGet("{id}", Name = "GetProductById")]
         public IActionResult Get(int id)
         {
-            return Ok(new Product().GetById(id) as Product);
+            var product = new Product().GetById(id) as Product;
+
+            if (product != null)
+                return Ok(product);
+
+            return NotFound();
         }
 
         [HttpPost(Name = "AddProduct")]

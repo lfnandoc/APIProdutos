@@ -25,7 +25,12 @@ namespace IntercambioGenebraAPI.Controllers
         [HttpGet("{id}", Name = "GetCategoryById")]
         public IActionResult Get(int id)
         {
-            return Ok(new Category().GetById(id) as Category);
+            var category = new Category().GetById(id) as Category;
+
+            if (category != null)
+                return Ok(category);
+
+            return NotFound();
         }
 
         [HttpPost(Name = "AddCategory")]
