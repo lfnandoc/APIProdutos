@@ -17,15 +17,15 @@ namespace IntercambioGenebraAPI.Controllers
         }
 
         [HttpGet(Name = "GetProducts")]
-        public IEnumerable<Product> Get()
+        public IActionResult Get()
         {
-            return new Product().GetAllMapped().OfType<Product>();
+            return Ok(new Product().GetAllMapped().OfType<Product>());
         }
 
         [HttpGet("{id}", Name = "GetProductById")]
-        public Product? Get(int id)
+        public IActionResult Get(int id)
         {
-            return new Product().GetById(id) as Product;
+            return Ok(new Product().GetById(id) as Product);
         }
 
         [HttpPost(Name = "AddProduct")]

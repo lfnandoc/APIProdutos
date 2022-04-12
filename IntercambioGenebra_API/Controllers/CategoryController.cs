@@ -17,15 +17,15 @@ namespace IntercambioGenebraAPI.Controllers
         }
 
         [HttpGet(Name = "GetCategories")]
-        public IEnumerable<Category> Get()
+        public IActionResult Get()
         {
-            return new Category().GetAllMapped().OfType<Category>();
+            return Ok(new Category().GetAllMapped().OfType<Category>());
         }
 
         [HttpGet("{id}", Name = "GetCategoryById")]
-        public Category? Get(int id)
+        public IActionResult Get(int id)
         {
-            return new Category().GetById(id) as Category;
+            return Ok(new Category().GetById(id) as Category);
         }
 
         [HttpPost(Name = "AddCategory")]
