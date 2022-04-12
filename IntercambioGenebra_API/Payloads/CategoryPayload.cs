@@ -2,6 +2,6 @@
 {
     public class CategoryPayload
     {
-        public string? Name;
+        public string? Name { get; set; }
     }
 }

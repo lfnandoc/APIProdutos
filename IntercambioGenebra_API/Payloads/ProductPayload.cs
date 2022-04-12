@@ -2,10 +2,10 @@
 {
     public class ProductPayload
     {
-        public string? Name;
+        public string? Name { get; set; }
 
-        public decimal? Price;
+        public decimal? Price { get; set; }
 
-        public int? CategoryId;
+        public int? CategoryId { get; set; }
     }
 }
