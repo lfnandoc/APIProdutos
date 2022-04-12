@@ -81,6 +81,9 @@ namespace IntercambioGenebraAPI.Controllers
             if (Category == null)
                 return NotFound();
 
+            if (Category.HasAssociatedProducts())
+                return BadRequest("Category could not be deleted because it has products associated with it.");           
+
             if (Category.Delete())
                 return NoContent();
 
