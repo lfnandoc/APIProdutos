@@ -16,14 +16,14 @@ namespace IntercambioGenebraAPI.Entities
         public int? CategoryId { get; set; }
 
         [SwaggerSchema(ReadOnly = true)]
-        public Category? Category
+        public string? CategoryName
         {
             get
             {
                 if (CategoryId != null)
-                    return new Category().GetById((int)CategoryId) as Category;
+                    return (new Category().GetById((int)CategoryId) as Category)?.Name;
 
-                return null;
+                return string.Empty;
             }
         }
 
