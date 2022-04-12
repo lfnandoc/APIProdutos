@@ -21,7 +21,7 @@ namespace IntercambioGenebraAPI.Entities
             get
             {
                 if (CategoryId != null)
-                    return (new Category().GetById((int)CategoryId) as Category)?.Name;
+                    return (new Category().GetById((int)CategoryId) as Category)?.Name ?? string.Empty;
 
                 return string.Empty;
             }
