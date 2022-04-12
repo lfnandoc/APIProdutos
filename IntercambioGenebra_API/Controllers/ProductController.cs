@@ -40,6 +40,11 @@ namespace IntercambioGenebraAPI.Controllers
             if (invalidProductName)
                 return BadRequest("Invalid product name.");
 
+            var invalidCategory = product.CategoryId == null || new Category().GetById((int) product.CategoryId) == null;
+
+            if (invalidCategory)
+                return BadRequest("Invalid category.");
+
             product.Price ??= 0;
 
             if (product.Save())
@@ -70,6 +75,16 @@ namespace IntercambioGenebraAPI.Controllers
                     return BadRequest("Invalid product name.");
 
                 existingProduct.Name = submittedProduct.Name;
+            }
+
+            var newCategory = submittedProduct.CategoryId != null;
+            if (newCategory)
+            {
+                var invalidCategory = new Category().GetById((int)submittedProduct.CategoryId) == null;
+                if (invalidCategory)
+                    return BadRequest("Invalid category.");
+
+                existingProduct.CategoryId = submittedProduct.CategoryId;
             }
 
             var newPrice = submittedProduct.Price != null;

@@ -1,4 +1,5 @@
 ﻿using IntercambioGenebraAPI.Infra.DB;
+using Swashbuckle.AspNetCore.Annotations;
 using System.Data;
 
 namespace IntercambioGenebraAPI.Entities
@@ -11,6 +12,21 @@ namespace IntercambioGenebraAPI.Entities
         [Column("price")]
         public decimal? Price { get; set; }
 
+        [Column("categoryId")]
+        public int? CategoryId { get; set; }
+
+        [SwaggerSchema(ReadOnly = true)]
+        public Category? Category
+        {
+            get
+            {
+                if (CategoryId != null)
+                    return new Category().GetById((int)CategoryId) as Category;
+
+                return null;
+            }
+        }
+
         public Product() : base()
         {
             table = "products";
@@ -21,6 +37,7 @@ namespace IntercambioGenebraAPI.Entities
             base.MapEntity(dataRow);
             Name = dataRow["name"].ToString();
             Price = Convert.ToDecimal(dataRow["price"]);
+            CategoryId = Convert.ToInt32(dataRow["categoryId"]);
         }
     }
 }
