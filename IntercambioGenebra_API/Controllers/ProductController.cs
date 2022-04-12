@@ -1,4 +1,5 @@
 using IntercambioGenebraAPI.Entities;
+using IntercambioGenebraAPI.Payloads;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IntercambioGenebraAPI.Controllers
@@ -28,13 +29,8 @@ namespace IntercambioGenebraAPI.Controllers
         }
 
         [HttpPost(Name = "AddProduct")]
-        public IActionResult Post(Product product)
+        public IActionResult Post(ProductPayload product)
         {
-            var userSubmittedId = product.Id != -2;
-
-            if (userSubmittedId)
-                return BadRequest("Custom product ids are not allowed.");
-
             var invalidProductName = product.Name == null || string.IsNullOrWhiteSpace(product.Name);
 
             if (invalidProductName)
@@ -47,24 +43,26 @@ namespace IntercambioGenebraAPI.Controllers
 
             product.Price ??= 0;
 
-            if (product.Save())
-                return CreatedAtRoute("GetProductById", new { id = product.Id }, product);
+            var productEntity = new Product() 
+            { 
+                Name = product.Name, 
+                Price = product.Price, 
+                CategoryId = product.CategoryId 
+            };
+
+            if (productEntity.Save())
+                return CreatedAtRoute("GetProductById", new { id = productEntity.Id }, productEntity);
 
             return BadRequest("Product could not be saved.");
         }
 
         [HttpPut("{id}", Name = "UpdateProduct")]
-        public IActionResult Put(int id, Product submittedProduct)
+        public IActionResult Put(int id, ProductPayload submittedProduct)
         {
             var existingProduct = new Product().GetById(id) as Product;
 
             if (existingProduct == null)
                 return NotFound();
-
-            var userSubmittedId = submittedProduct.Id != -2;
-
-            if (userSubmittedId)
-                return BadRequest("Updating product ids is not allowed.");
 
             var newProductName = submittedProduct.Name != null;
             
