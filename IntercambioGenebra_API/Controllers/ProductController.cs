@@ -1,4 +1,5 @@
 using IntercambioGenebraAPI.Entities;
+using IntercambioGenebraAPI.Payloads;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IntercambioGenebraAPI.Controllers
@@ -16,50 +17,57 @@ namespace IntercambioGenebraAPI.Controllers
         }
 
         [HttpGet(Name = "GetProducts")]
-        public IEnumerable<Product> Get()
+        public IActionResult Get()
         {
-            return new Product().GetAllMapped().OfType<Product>();
+            return Ok(new Product().GetAllMapped().OfType<Product>());
         }
 
         [HttpGet("{id}", Name = "GetProductById")]
-        public Product? Get(int id)
+        public IActionResult Get(int id)
         {
-            return new Product().GetById(id) as Product;
+            var product = new Product().GetById(id) as Product;
+
+            if (product != null)
+                return Ok(product);
+
+            return NotFound();
         }
 
         [HttpPost(Name = "AddProduct")]
-        public IActionResult Post(Product product)
+        public IActionResult Post(ProductPayload product)
         {
-            var userSubmittedId = product.Id != -2;
-
-            if (userSubmittedId)
-                return BadRequest("Custom product ids are not allowed.");
-
             var invalidProductName = product.Name == null || string.IsNullOrWhiteSpace(product.Name);
 
             if (invalidProductName)
                 return BadRequest("Invalid product name.");
 
+            var invalidCategory = product.CategoryId == null || new Category().GetById((int) product.CategoryId) == null;
+
+            if (invalidCategory)
+                return BadRequest("Invalid category.");
+
             product.Price ??= 0;
 
-            if (product.Save())
-                return CreatedAtRoute("GetProductById", new { id = product.Id }, product);
+            var productEntity = new Product() 
+            { 
+                Name = product.Name, 
+                Price = product.Price, 
+                CategoryId = product.CategoryId 
+            };
+
+            if (productEntity.Save())
+                return CreatedAtRoute("GetProductById", new { id = productEntity.Id }, productEntity);
 
             return BadRequest("Product could not be saved.");
         }
 
         [HttpPut("{id}", Name = "UpdateProduct")]
-        public IActionResult Put(int id, Product submittedProduct)
+        public IActionResult Put(int id, ProductPayload submittedProduct)
         {
             var existingProduct = new Product().GetById(id) as Product;
 
             if (existingProduct == null)
                 return NotFound();
-
-            var userSubmittedId = submittedProduct.Id != -2;
-
-            if (userSubmittedId)
-                return BadRequest("Updating product ids is not allowed.");
 
             var newProductName = submittedProduct.Name != null;
             
@@ -70,6 +78,16 @@ namespace IntercambioGenebraAPI.Controllers
                     return BadRequest("Invalid product name.");
 
                 existingProduct.Name = submittedProduct.Name;
+            }
+
+            var newCategory = submittedProduct.CategoryId != null;
+            if (newCategory)
+            {
+                var invalidCategory = new Category().GetById((int)submittedProduct.CategoryId) == null;
+                if (invalidCategory)
+                    return BadRequest("Invalid category.");
+
+                existingProduct.CategoryId = submittedProduct.CategoryId;
             }
 
             var newPrice = submittedProduct.Price != null;
