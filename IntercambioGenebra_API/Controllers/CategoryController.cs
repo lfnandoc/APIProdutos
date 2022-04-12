@@ -39,8 +39,7 @@ namespace IntercambioGenebraAPI.Controllers
             var invalidCategoryName = category.Name == null || string.IsNullOrWhiteSpace(category.Name);
 
             if (invalidCategoryName)
-                return BadRequest("Invalid Category name.");
-
+                return BadRequest("Invalid category name.");
 
             var categoryEntity = new Category()
             {
@@ -67,7 +66,7 @@ namespace IntercambioGenebraAPI.Controllers
             {
                 var invalidCategoryName = string.IsNullOrWhiteSpace(submittedCategory.Name);
                 if (invalidCategoryName)
-                    return BadRequest("Invalid Category name.");
+                    return BadRequest("Invalid category name.");
 
                 existingCategory.Name = submittedCategory.Name;
             }
