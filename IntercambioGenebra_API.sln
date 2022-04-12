@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntercambioGenebraAPI", "IntercambioGenebra_API\IntercambioGenebraAPI.csproj", "{0CBC6E27-838F-4FF5-A3AF-79CFEC64DFDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntercambioGenebraAPI", "IntercambioGenebra_API\IntercambioGenebraAPI.csproj", "{0CBC6E27-838F-4FF5-A3AF-79CFEC64DFDC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3B32DF32-6423-4317-B767-DF41B6280EE0}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
