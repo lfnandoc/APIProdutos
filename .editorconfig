@@ -18,6 +18,9 @@ csharp_style_throw_expression = true:suggestion
 csharp_indent_labels = one_less_than_current
 csharp_style_prefer_null_check_over_type_check = true:suggestion
 
+# CS8618: Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+dotnet_diagnostic.CS8618.severity = none
+
 [*.{cs,vb}]
 #### Naming styles ####
 
