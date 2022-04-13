@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IntercambioGenebraAPI.Repositories
 {
-    public class CategoryRepository
+    public class CategoryRepository : BaseRepository
     {
         private readonly AppDbContext _context;
         
-        public CategoryRepository(AppDbContext context)
+        public CategoryRepository(AppDbContext context) : base(context)
         {
             _context = context;
         }
