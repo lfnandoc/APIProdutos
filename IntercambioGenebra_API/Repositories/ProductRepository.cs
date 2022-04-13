@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IntercambioGenebraAPI.Repositories
 {
-    public class ProductRepository : BaseRepository<Product>
+    public class ProductRepository : BaseRepository<Product>, IProductRepository
     {
         private readonly AppDbContext _context;
         

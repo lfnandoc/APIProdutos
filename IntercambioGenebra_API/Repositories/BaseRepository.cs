@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IntercambioGenebraAPI.Repositories
 {
-    public class BaseRepository<TEntity>
+    public class BaseRepository<TEntity> : IBaseRepository<TEntity>
     {
         private readonly AppDbContext _context;
         public BaseRepository(AppDbContext context)
@@ -25,6 +25,11 @@ namespace IntercambioGenebraAPI.Repositories
         public void Delete(TEntity entity)
         {
             _context.Remove(entity);
+        }
+
+        public void Save()
+        {
+            _context.SaveChanges();
         }
 
     }
