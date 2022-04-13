@@ -8,5 +8,10 @@ namespace IntercambioGenebraAPI.Queries.GetCategoryById
     public class GetCategoryByIdQuery : IRequest<Response>
     {
         public Guid Id { get; set; }
+
+        public GetCategoryByIdQuery(Guid id)
+        {
+            Id = id;
+        }
     }
 }

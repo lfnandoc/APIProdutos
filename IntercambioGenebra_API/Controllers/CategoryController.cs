@@ -38,7 +38,7 @@ namespace IntercambioGenebraAPI.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Get([FromRoute] Guid id)
         {
-            var query = new GetCategoryByIdQuery() { Id = id };
+            var query = new GetCategoryByIdQuery(id);
             var response = await _mediator.Send(query);
             
             return response.Result;
