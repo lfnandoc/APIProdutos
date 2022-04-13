@@ -4,6 +4,8 @@ using IntercambioGenebraAPI.Entities;
 using IntercambioGenebraAPI.Mediator;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
+using IntercambioGenebraAPI.ViewModels;
 
 namespace IntercambioGenebraAPI.Commands.CreateProduct
 {
@@ -11,11 +13,13 @@ namespace IntercambioGenebraAPI.Commands.CreateProduct
     {
         private readonly IProductRepository _repository;
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IMapper _mapper;
 
-        public CreateProductCommandHandler(IProductRepository repository, ICategoryRepository categoryRepository)
+        public CreateProductCommandHandler(IProductRepository repository, ICategoryRepository categoryRepository, IMapper mapper)
         {
             _repository = repository;
             _categoryRepository = categoryRepository;
+            _mapper = mapper; 
         }
 
         public async Task<Response> Handle(CreateProductCommand request, CancellationToken cancellationToken)
@@ -51,7 +55,8 @@ namespace IntercambioGenebraAPI.Commands.CreateProduct
 
                 _repository.Insert(product);
                 _repository.Save();
-                response.Result = new OkObjectResult(product);
+                var productViewModel = _mapper.Map<Product, ProductViewModel>(product);
+                response.Result = new OkObjectResult(productViewModel);
             }
             catch (Exception exception)
             {
