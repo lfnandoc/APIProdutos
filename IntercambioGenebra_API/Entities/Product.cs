@@ -6,7 +6,7 @@
 
         public decimal Price { get; set; } = 0;
 
-        public int CategoryId { get; set; }
+        public Guid CategoryId { get; set; }
     
     }
 }

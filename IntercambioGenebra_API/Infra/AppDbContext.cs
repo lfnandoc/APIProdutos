@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using IntercambioGenebraAPI.Entities;
-using IntercambioGenebraAPI.Configuration;
 
 namespace IntercambioGenebraAPI.Infra
 {
@@ -10,9 +9,9 @@ namespace IntercambioGenebraAPI.Infra
 
         public DbSet<Category> Categories { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>        
-            optionsBuilder.UseMySQL(AppConfiguration.ConnectionString);
-        
+        public AppDbContext(DbContextOptions options) : base(options)
+        {            
+        }       
 
     }
 }
