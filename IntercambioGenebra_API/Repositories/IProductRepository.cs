@@ -8,7 +8,7 @@ namespace IntercambioGenebraAPI.Repositories
     {
         Task<Product?> GetProductByIdAsync(Guid id);
 
-        Task<List<Product>> GetAllCategoriesAsync();      
+        Task<List<Product>> GetAllProductsAsync();      
 
     }
 }

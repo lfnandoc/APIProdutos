@@ -22,7 +22,7 @@ namespace IntercambioGenebraAPI.Repositories
             
             return product;            
         }
-        public async Task<List<Product>> GetAllCategoriesAsync()
+        public async Task<List<Product>> GetAllProductsAsync()
         {
             var products = await _context
                 .Products

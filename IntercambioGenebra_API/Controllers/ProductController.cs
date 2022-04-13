@@ -1,5 +1,7 @@
 using IntercambioGenebraAPI.Commands.CreateProduct;
 using IntercambioGenebraAPI.Entities;
+using IntercambioGenebraAPI.Queries.GetAllProducts;
+using IntercambioGenebraAPI.Queries.GetProductById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +19,27 @@ namespace IntercambioGenebraAPI.Controllers
             _logger = logger;
             _mediator = mediator;
         }
+        
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var query = new GetAllProductsQuery();
+            var response = await _mediator.Send(query);
 
+            return response.Result;
+        }
+
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> Get([FromRoute] Guid id)
+        {
+            var query = new GetProductByIdQuery(id);
+            var response = await _mediator.Send(query);
+
+            return response.Result;
+        }
+        
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateProductCommand command)
         {
