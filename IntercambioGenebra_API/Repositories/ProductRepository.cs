@@ -17,6 +17,7 @@ namespace IntercambioGenebraAPI.Repositories
         {
             var product = await _context
                 .Products
+                .Include(product => product.Category)
                 .FirstOrDefaultAsync(product => product.Id == id);
             
             return product;            
@@ -25,6 +26,7 @@ namespace IntercambioGenebraAPI.Repositories
         {
             var products = await _context
                 .Products
+                .Include(product => product.Category)
                 .AsNoTracking()
                 .ToListAsync();
 
