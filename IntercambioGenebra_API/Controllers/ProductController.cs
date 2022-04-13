@@ -1,4 +1,6 @@
 using IntercambioGenebraAPI.Commands.CreateProduct;
+using IntercambioGenebraAPI.Commands.DeleteProduct;
+using IntercambioGenebraAPI.Commands.UpdateProduct;
 using IntercambioGenebraAPI.Entities;
 using IntercambioGenebraAPI.Queries.GetAllProducts;
 using IntercambioGenebraAPI.Queries.GetProductById;
@@ -43,6 +45,41 @@ namespace IntercambioGenebraAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateProductCommand command)
         {
+            var response = await _mediator.Send(command);
+
+            if (response.Errors.Any())
+            {
+                return BadRequest(response.Errors);
+            }
+
+            return response.Result;
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> Put([FromBody] UpdateProductCommand command, [FromRoute] Guid id)
+        {
+            if (command.Id != id)
+            {
+                return UnprocessableEntity("Ids doesn't match.");
+            }
+
+            var response = await _mediator.Send(command);
+
+            if (response.Errors.Any())
+            {
+                return BadRequest(response.Errors);
+            }
+
+            return response.Result;
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        {
+            var command = new DeleteProductCommand(id);
+
             var response = await _mediator.Send(command);
 
             if (response.Errors.Any())
