@@ -17,13 +17,11 @@ namespace IntercambioGenebraAPI.Controllers
     {
 
         private readonly ILogger<CategoryController> _logger;
-        private readonly ICategoryRepository _repository;
         private readonly IMediator _mediator;
 
-        public CategoryController(ILogger<CategoryController> logger, ICategoryRepository repository, IMediator mediator)
+        public CategoryController(ILogger<CategoryController> logger, IMediator mediator)
         {
             _logger = logger;
-            _repository = repository;
             _mediator = mediator;
         }
 
@@ -61,7 +59,7 @@ namespace IntercambioGenebraAPI.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> Post([FromBody] UpdateCategoryCommand command, [FromRoute] Guid id)
+        public async Task<IActionResult> Put([FromBody] UpdateCategoryCommand command, [FromRoute] Guid id)
         {
             if (command.Id != id)
             {
