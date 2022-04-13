@@ -1,9 +1,12 @@
 ﻿using FluentValidation;
+using IntercambioGenebraAPI.Mediator;
+using MediatR;
 
-namespace IntercambioGenebraAPI.Commands.Category
+namespace IntercambioGenebraAPI.Commands.UpdateCategory
 {
-    public class UpdateCategoryCommand
+    public class UpdateCategoryCommand : IRequest<Response>
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
     }
 

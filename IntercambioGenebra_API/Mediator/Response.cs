@@ -1,10 +1,12 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace IntercambioGenebraAPI.Mediator
 {
-    public class Response<TObject>
+    public class Response
     {
-        public TObject? Result { get; set; }
+        public IActionResult Result { get; set; } 
+
         public List<string> Errors { get; set; } = new List<string>();
     }
 }

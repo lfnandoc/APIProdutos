@@ -3,10 +3,11 @@ using IntercambioGenebraAPI.Repositories;
 using IntercambioGenebraAPI.Entities;
 using IntercambioGenebraAPI.Mediator;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
-namespace IntercambioGenebraAPI.Commands.Category
+namespace IntercambioGenebraAPI.Commands.CreateCategory
 {
-    public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, Response<Entities.Category>>
+    public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, Response>
     {
         private readonly ICategoryRepository _repository;
 
@@ -15,25 +16,29 @@ namespace IntercambioGenebraAPI.Commands.Category
             _repository = repository;
         }
 
-        public async Task<Response<Entities.Category>> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
+        public async Task<Response> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
         {
             var validator = new CreateCategoryCommandValidator();
             var validationResult = await validator.ValidateAsync(request);
-            var response = new Response<Entities.Category>();
+            var response = new Response();
 
-            if (!validationResult.IsValid)            
+            if (!validationResult.IsValid)
+            {
                 validationResult.Errors.ForEach(error => response.Errors.Add(error.ErrorMessage));
+                response.Result = new BadRequestObjectResult(response.Errors);
+                return response;
+            }
 
             try
             {
-                var category = new Entities.Category()
+                var category = new Category()
                 {
                     Name = request.Name
                 };
 
                 _repository.Insert(category);
                 _repository.Save();
-                response.Result = category;
+                response.Result = new OkObjectResult(category);
             }
             catch (Exception exception)
             {

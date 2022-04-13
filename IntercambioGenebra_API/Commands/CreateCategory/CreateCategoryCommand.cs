@@ -1,10 +1,11 @@
 ﻿using FluentValidation;
+using IntercambioGenebraAPI.Entities;
 using IntercambioGenebraAPI.Mediator;
 using MediatR;
 
-namespace IntercambioGenebraAPI.Commands.Category
+namespace IntercambioGenebraAPI.Commands.CreateCategory
 {
-    public class CreateCategoryCommand : IRequest<Response<Entities.Category>>
+    public class CreateCategoryCommand : IRequest<Response>
     {
         public string Name { get; set; }
     }
