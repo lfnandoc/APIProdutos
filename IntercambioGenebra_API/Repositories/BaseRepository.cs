@@ -12,17 +12,17 @@ namespace IntercambioGenebraAPI.Repositories
             _context = context;
         }
         
-        public async virtual void Insert(TEntity entity)
+        public void Insert(TEntity entity)
         {
-            await _context.AddAsync(entity);
+            _context.Add(entity);
         }
 
-        public virtual void Update(TEntity entity)
+        public void Update(TEntity entity)
         {
             _context.Update(entity);
         }
 
-        public virtual void Delete(TEntity entity)
+        public void Delete(TEntity entity)
         {
             _context.Remove(entity);
         }
