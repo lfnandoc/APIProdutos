@@ -1,5 +1,7 @@
+
 using IntercambioGenebraAPI.Infra;
 using IntercambioGenebraAPI.Repositories;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,8 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connectionString, serverVersion));
 builder.Services.AddControllers();
+var assembly = AppDomain.CurrentDomain.Load("IntercambioGenebraAPI");
+builder.Services.AddMediatR(assembly);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options => options.EnableAnnotations());
 
