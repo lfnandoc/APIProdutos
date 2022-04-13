@@ -80,7 +80,7 @@ namespace IntercambioGenebraAPI.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
-            var command = new DeleteCategoryCommand() { Id = id};
+            var command = new DeleteCategoryCommand(id);
 
             var response = await _mediator.Send(command);
 
