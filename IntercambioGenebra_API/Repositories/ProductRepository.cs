@@ -8,7 +8,7 @@ namespace IntercambioGenebraAPI.Repositories
     {
         private readonly AppDbContext _context;
         
-        public ProductRepository(AppDbContext context)
+        public ProductRepository(AppDbContext context) : base(context)
         {
             _context = context;
         }
