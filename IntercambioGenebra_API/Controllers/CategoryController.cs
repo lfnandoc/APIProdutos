@@ -3,6 +3,8 @@ using IntercambioGenebraAPI.Commands.CreateCategory;
 using IntercambioGenebraAPI.Commands.DeleteCategory;
 using IntercambioGenebraAPI.Commands.UpdateCategory;
 using IntercambioGenebraAPI.Entities;
+using IntercambioGenebraAPI.Queries.GetAllCategories;
+using IntercambioGenebraAPI.Queries.GetCategoryById;
 using IntercambioGenebraAPI.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -28,14 +30,20 @@ namespace IntercambioGenebraAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await _repository.GetAllCategories());
+            var query = new GetAllCategoriesQuery();
+            var response = await _mediator.Send(query);
+
+            return response.Result;
         }
 
         [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> Get([FromRoute] Guid id)
         {
-            return Ok(await _repository.GetCategoryByIdAsync(id));
+            var query = new GetCategoryByIdQuery() { Id = id };
+            var response = await _mediator.Send(query);
+            
+            return response.Result;
         }
 
         [HttpPost]
