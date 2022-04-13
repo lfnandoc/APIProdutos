@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using IntercambioGenebraAPI.Entities;
 using IntercambioGenebraAPI.Mediator;
 using MediatR;
 
@@ -18,6 +17,6 @@ namespace IntercambioGenebraAPI.Commands.CreateCategory
                 .NotEmpty()
                 .WithMessage("Name is required.");
         }
-    }    
-    
+    }
+
 }

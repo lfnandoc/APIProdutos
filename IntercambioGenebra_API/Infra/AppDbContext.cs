@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using IntercambioGenebraAPI.Entities;
+﻿using IntercambioGenebraAPI.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace IntercambioGenebraAPI.Infra
 {
@@ -10,8 +10,8 @@ namespace IntercambioGenebraAPI.Infra
         public DbSet<Category> Categories { get; set; }
 
         public AppDbContext(DbContextOptions options) : base(options)
-        {            
-        }       
+        {
+        }
 
     }
 }

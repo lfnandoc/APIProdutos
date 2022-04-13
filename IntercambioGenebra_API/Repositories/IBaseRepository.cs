@@ -1,8 +1,4 @@
-﻿using IntercambioGenebraAPI.Entities;
-using IntercambioGenebraAPI.Infra;
-using Microsoft.EntityFrameworkCore;
-
-namespace IntercambioGenebraAPI.Repositories
+﻿namespace IntercambioGenebraAPI.Repositories
 {
     public interface IBaseRepository<TEntity>
     {
@@ -11,7 +7,7 @@ namespace IntercambioGenebraAPI.Repositories
         void Update(TEntity entity);
 
         void Delete(TEntity entity);
-        
+
         void Save();
 
     }

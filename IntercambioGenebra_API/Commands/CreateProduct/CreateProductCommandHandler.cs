@@ -1,11 +1,10 @@
-﻿using FluentValidation;
-using IntercambioGenebraAPI.Repositories;
+﻿using AutoMapper;
 using IntercambioGenebraAPI.Entities;
 using IntercambioGenebraAPI.Mediator;
+using IntercambioGenebraAPI.Repositories;
+using IntercambioGenebraAPI.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
-using IntercambioGenebraAPI.ViewModels;
 
 namespace IntercambioGenebraAPI.Commands.CreateProduct
 {
@@ -19,7 +18,7 @@ namespace IntercambioGenebraAPI.Commands.CreateProduct
         {
             _repository = repository;
             _categoryRepository = categoryRepository;
-            _mapper = mapper; 
+            _mapper = mapper;
         }
 
         public async Task<Response> Handle(CreateProductCommand request, CancellationToken cancellationToken)
@@ -35,7 +34,7 @@ namespace IntercambioGenebraAPI.Commands.CreateProduct
                 return response;
             }
 
-            try                
+            try
             {
                 var category = await _categoryRepository.GetCategoryByIdAsync(request.CategoryId);
 

@@ -1,7 +1,5 @@
-﻿using FluentValidation;
+﻿using IntercambioGenebraAPI.Mediator;
 using IntercambioGenebraAPI.Repositories;
-using IntercambioGenebraAPI.Entities;
-using IntercambioGenebraAPI.Mediator;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +17,7 @@ namespace IntercambioGenebraAPI.Queries.GetCategoryById
         public async Task<Response> Handle(GetCategoryByIdQuery request, CancellationToken cancellationToken)
         {
             var response = new Response();
-            
+
             try
             {
                 var category = await _repository.GetCategoryByIdAsync(request.Id);

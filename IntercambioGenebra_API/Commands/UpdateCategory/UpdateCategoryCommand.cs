@@ -16,7 +16,7 @@ namespace IntercambioGenebraAPI.Commands.UpdateCategory
         {
             RuleFor(command => command.Name)
                 .NotEmpty()
-                .WithMessage("Name is required."); 
+                .WithMessage("Name is required.");
         }
     }
 }

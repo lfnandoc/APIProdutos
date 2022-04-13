@@ -7,21 +7,21 @@ namespace IntercambioGenebraAPI.Repositories
     public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
     {
         private readonly AppDbContext _context;
-        
+
         public CategoryRepository(AppDbContext context) : base(context)
         {
             _context = context;
         }
-        
+
         public async Task<Category?> GetCategoryByIdAsync(Guid id)
         {
             var category = await _context
                 .Categories
                 .FirstOrDefaultAsync(category => category.Id == id);
-            
-            return category;            
+
+            return category;
         }
-        
+
         public async Task<List<Category>> GetAllCategories()
         {
             var categories = await _context

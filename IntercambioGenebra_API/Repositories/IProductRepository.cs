@@ -1,6 +1,4 @@
 ﻿using IntercambioGenebraAPI.Entities;
-using IntercambioGenebraAPI.Infra;
-using Microsoft.EntityFrameworkCore;
 
 namespace IntercambioGenebraAPI.Repositories
 {
@@ -8,7 +6,7 @@ namespace IntercambioGenebraAPI.Repositories
     {
         Task<Product?> GetProductByIdAsync(Guid id);
 
-        Task<List<Product>> GetAllProductsAsync();      
+        Task<List<Product>> GetAllProductsAsync();
 
     }
 }

@@ -1,11 +1,10 @@
-﻿using FluentValidation;
-using IntercambioGenebraAPI.Repositories;
+﻿using AutoMapper;
 using IntercambioGenebraAPI.Entities;
 using IntercambioGenebraAPI.Mediator;
+using IntercambioGenebraAPI.Repositories;
+using IntercambioGenebraAPI.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
-using IntercambioGenebraAPI.ViewModels;
 
 namespace IntercambioGenebraAPI.Commands.UpdateProduct
 {
@@ -60,10 +59,14 @@ namespace IntercambioGenebraAPI.Commands.UpdateProduct
                 }
 
                 if (request.Name != null)
+                {
                     product.Name = request.Name;
+                }
 
                 if (request.Price != null)
-                    product.Price = (decimal) request.Price;
+                {
+                    product.Price = (decimal)request.Price;
+                }
 
                 _repository.Save();
                 var productViewModel = _mapper.Map<Product, ProductViewModel>(product);

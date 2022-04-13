@@ -1,6 +1,4 @@
-﻿using IntercambioGenebraAPI.Entities;
-using IntercambioGenebraAPI.Infra;
-using Microsoft.EntityFrameworkCore;
+﻿using IntercambioGenebraAPI.Infra;
 
 namespace IntercambioGenebraAPI.Repositories
 {
@@ -11,7 +9,7 @@ namespace IntercambioGenebraAPI.Repositories
         {
             _context = context;
         }
-        
+
         public void Insert(TEntity entity)
         {
             _context.Add(entity);

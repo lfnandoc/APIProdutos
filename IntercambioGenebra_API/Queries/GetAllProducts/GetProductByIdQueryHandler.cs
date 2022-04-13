@@ -1,11 +1,10 @@
-﻿using FluentValidation;
-using IntercambioGenebraAPI.Repositories;
+﻿using AutoMapper;
 using IntercambioGenebraAPI.Entities;
 using IntercambioGenebraAPI.Mediator;
+using IntercambioGenebraAPI.Repositories;
+using IntercambioGenebraAPI.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
-using IntercambioGenebraAPI.ViewModels;
 
 namespace IntercambioGenebraAPI.Queries.GetAllProducts
 {
@@ -21,16 +20,16 @@ namespace IntercambioGenebraAPI.Queries.GetAllProducts
             _categoryRepository = categoryRepository;
             _mapper = mapper;
         }
-        
+
         public async Task<Response> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
         {
             var response = new Response();
-            
+
             try
             {
-                var products = await _repository.GetAllProductsAsync();                                
+                var products = await _repository.GetAllProductsAsync();
                 var productsViewModel = _mapper.Map<List<Product>, List<ProductViewModel>>(products);
-                
+
                 response.Result = new OkObjectResult(productsViewModel);
             }
             catch (Exception exception)

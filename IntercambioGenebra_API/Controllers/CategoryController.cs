@@ -1,11 +1,8 @@
-using IntercambioGenebraAPI.Commands;
 using IntercambioGenebraAPI.Commands.CreateCategory;
 using IntercambioGenebraAPI.Commands.DeleteCategory;
 using IntercambioGenebraAPI.Commands.UpdateCategory;
-using IntercambioGenebraAPI.Entities;
 using IntercambioGenebraAPI.Queries.GetAllCategories;
 using IntercambioGenebraAPI.Queries.GetCategoryById;
-using IntercambioGenebraAPI.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -40,7 +37,7 @@ namespace IntercambioGenebraAPI.Controllers
         {
             var query = new GetCategoryByIdQuery(id);
             var response = await _mediator.Send(query);
-            
+
             return response.Result;
         }
 
@@ -65,7 +62,7 @@ namespace IntercambioGenebraAPI.Controllers
             {
                 return UnprocessableEntity("Ids doesn't match.");
             }
-            
+
             var response = await _mediator.Send(command);
 
             if (response.Errors.Any())

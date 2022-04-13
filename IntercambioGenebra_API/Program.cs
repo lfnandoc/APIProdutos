@@ -16,10 +16,10 @@ builder.Services.AddControllers();
 var assembly = AppDomain.CurrentDomain.Load("IntercambioGenebraAPI");
 builder.Services.AddMediatR(assembly);
 
-builder.Services.AddAutoMapper(cfg => 
-{ 
-    cfg.AddProfile<ProductViewModelProfile>(); 
-}, 
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddProfile<ProductViewModelProfile>();
+},
 assembly);
 
 builder.Services.AddEndpointsApiExplorer();

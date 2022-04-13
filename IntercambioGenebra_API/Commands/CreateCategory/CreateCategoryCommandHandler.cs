@@ -1,7 +1,6 @@
-﻿using FluentValidation;
-using IntercambioGenebraAPI.Repositories;
-using IntercambioGenebraAPI.Entities;
+﻿using IntercambioGenebraAPI.Entities;
 using IntercambioGenebraAPI.Mediator;
+using IntercambioGenebraAPI.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

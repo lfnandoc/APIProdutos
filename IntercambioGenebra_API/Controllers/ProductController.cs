@@ -1,7 +1,6 @@
 using IntercambioGenebraAPI.Commands.CreateProduct;
 using IntercambioGenebraAPI.Commands.DeleteProduct;
 using IntercambioGenebraAPI.Commands.UpdateProduct;
-using IntercambioGenebraAPI.Entities;
 using IntercambioGenebraAPI.Queries.GetAllProducts;
 using IntercambioGenebraAPI.Queries.GetProductById;
 using MediatR;
@@ -21,7 +20,7 @@ namespace IntercambioGenebraAPI.Controllers
             _logger = logger;
             _mediator = mediator;
         }
-        
+
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -41,7 +40,7 @@ namespace IntercambioGenebraAPI.Controllers
 
             return response.Result;
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateProductCommand command)
         {

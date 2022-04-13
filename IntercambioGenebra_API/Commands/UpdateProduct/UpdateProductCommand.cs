@@ -23,7 +23,8 @@ namespace IntercambioGenebraAPI.Commands.UpdateProduct
                 .WithMessage("Name should not be empty.");
             });
 
-            When(command => command.Price != null, () => {
+            When(command => command.Price != null, () =>
+            {
                 RuleFor(command => command.Price)
                     .GreaterThanOrEqualTo(0)
                     .WithMessage("Price must be greater than or equal 0.");

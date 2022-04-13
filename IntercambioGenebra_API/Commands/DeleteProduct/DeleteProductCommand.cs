@@ -1,5 +1,4 @@
-﻿using FluentValidation;
-using IntercambioGenebraAPI.Mediator;
+﻿using IntercambioGenebraAPI.Mediator;
 using MediatR;
 
 namespace IntercambioGenebraAPI.Commands.DeleteProduct

@@ -1,7 +1,5 @@
-﻿using FluentValidation;
+﻿using IntercambioGenebraAPI.Mediator;
 using IntercambioGenebraAPI.Repositories;
-using IntercambioGenebraAPI.Entities;
-using IntercambioGenebraAPI.Mediator;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,9 +15,9 @@ namespace IntercambioGenebraAPI.Commands.DeleteCategory
         }
 
         public async Task<Response> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
-        {            
+        {
             var response = new Response();
-            
+
             try
             {
                 var category = await _repository.GetCategoryByIdAsync(request.Id);

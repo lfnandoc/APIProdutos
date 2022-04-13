@@ -1,6 +1,6 @@
-﻿using IntercambioGenebraAPI.Entities;
+﻿using AutoMapper;
+using IntercambioGenebraAPI.Entities;
 using IntercambioGenebraAPI.ViewModels;
-using AutoMapper;
 
 namespace IntercambioGenebraAPI.MapperProfiles
 {
