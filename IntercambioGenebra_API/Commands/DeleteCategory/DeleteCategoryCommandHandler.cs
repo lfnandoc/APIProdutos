@@ -30,6 +30,13 @@ namespace IntercambioGenebraAPI.Commands.DeleteCategory
                     return response;
                 }
 
+                var categoryHasAssociatedProducts = await _repository.CategoryHasAssociatedProducts(request.Id);
+                if (categoryHasAssociatedProducts)
+                {
+                    response.Result = new BadRequestObjectResult("Category could not be deleted because it has products associated with it.");
+                    return response;
+                }
+
                 _repository.Delete(category);
                 _repository.Save();
 
