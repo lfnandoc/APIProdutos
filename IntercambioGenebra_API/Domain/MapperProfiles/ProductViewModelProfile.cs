@@ -2,7 +2,7 @@
 using IntercambioGenebraAPI.Domain.Entities;
 using IntercambioGenebraAPI.Domain.ViewModels;
 
-namespace IntercambioGenebraAPI.Application.MapperProfiles
+namespace IntercambioGenebraAPI.Domain.MapperProfiles
 {
     public class ProductViewModelProfile : Profile
     {

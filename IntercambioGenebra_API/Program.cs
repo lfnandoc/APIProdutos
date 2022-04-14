@@ -1,4 +1,4 @@
-using IntercambioGenebraAPI.Application.MapperProfiles;
+using IntercambioGenebraAPI.Domain.MapperProfiles;
 using IntercambioGenebraAPI.Domain.Repositories;
 using IntercambioGenebraAPI.Infrastructure;
 using IntercambioGenebraAPI.Infrastructure.Repositories;
