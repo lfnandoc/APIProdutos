@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IntercambioGenebraAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("product")]
     public class ProductController : ControllerBase
     {
         private readonly ILogger<ProductController> _logger;

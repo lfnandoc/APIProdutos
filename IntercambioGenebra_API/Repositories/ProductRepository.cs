@@ -32,6 +32,17 @@ namespace IntercambioGenebraAPI.Repositories
 
             return products;
         }
+        public async Task<List<Product>> GetProductsByCategoryIdAsync(Guid categoryId)
+        {
+            var products = await _context
+                .Products
+                .Include(product => product.Category)
+                .Where(product => product.CategoryId == categoryId)
+                .AsNoTracking()
+                .ToListAsync();
+
+            return products;
+        }
 
     }
 }
