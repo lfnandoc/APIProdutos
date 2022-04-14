@@ -23,6 +23,12 @@ namespace IntercambioGenebraAPI.Application.Queries.GetProduct
             {
                 var product = await _repository.GetProductByIdAsync(request.Id);
 
+                if (product == null)
+                {
+                    response.Result = new NotFoundObjectResult("Product not found.");
+                    return response;
+                }
+
                 var productViewModel = new ProductViewModel
                 {
                     Id = product.Id,

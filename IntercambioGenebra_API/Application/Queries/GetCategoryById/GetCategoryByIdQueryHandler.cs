@@ -21,6 +21,13 @@ namespace IntercambioGenebraAPI.Application.Queries.GetCategoryById
             try
             {
                 var category = await _repository.GetCategoryByIdAsync(request.Id);
+
+                if (category == null)
+                {
+                    response.Result = new NotFoundObjectResult("Category not found.");
+                    return response;
+                }
+                
                 response.Result = new OkObjectResult(category);
             }
             catch (Exception exception)
