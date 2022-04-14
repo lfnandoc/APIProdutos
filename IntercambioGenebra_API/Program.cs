@@ -1,7 +1,7 @@
-
-using IntercambioGenebraAPI.Infra;
-using IntercambioGenebraAPI.MapperProfiles;
-using IntercambioGenebraAPI.Repositories;
+using IntercambioGenebraAPI.Application.MapperProfiles;
+using IntercambioGenebraAPI.Domain.Repositories;
+using IntercambioGenebraAPI.Infrastructure;
+using IntercambioGenebraAPI.Infrastructure.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,11 +16,8 @@ builder.Services.AddControllers();
 var assembly = AppDomain.CurrentDomain.Load("IntercambioGenebraAPI");
 builder.Services.AddMediatR(assembly);
 
-builder.Services.AddAutoMapper(cfg =>
-{
-    cfg.AddProfile<ProductViewModelProfile>();
-},
-assembly);
+builder.Services.AddAutoMapper(cfg => { cfg.AddProfile<ProductViewModelProfile>(); },
+    assembly);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options => options.EnableAnnotations());
