@@ -10,15 +10,14 @@ namespace IntercambioGenebraAPI.Application.Queries.GetProductsByCategoryId
 {
     public class GetProductsByCategoryIdQueryHandler : IRequestHandler<GetProductsByCategoryIdQuery, Response>
     {
-        private readonly ICategoryRepository _categoryRepository;
+        
         private readonly IMapper _mapper;
         private readonly IProductRepository _repository;
 
-        public GetProductsByCategoryIdQueryHandler(IProductRepository repository,
-            ICategoryRepository categoryRepository, IMapper mapper)
+        public GetProductsByCategoryIdQueryHandler(IProductRepository repository, 
+            IMapper mapper)
         {
             _repository = repository;
-            _categoryRepository = categoryRepository;
             _mapper = mapper;
         }
 
