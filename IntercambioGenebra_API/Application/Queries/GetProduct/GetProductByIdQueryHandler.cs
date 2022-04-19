@@ -1,18 +1,20 @@
 ﻿using IntercambioGenebraAPI.Application.Mediator;
 using IntercambioGenebraAPI.Domain.Repositories;
 using IntercambioGenebraAPI.Domain.ViewModels;
+using IntercambioGenebraAPI.Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace IntercambioGenebraAPI.Application.Queries.GetProduct
 {
     public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, Response>
     {
-        private readonly IProductRepository _repository;
+        private readonly AppDbContext _context;
 
-        public GetProductByIdQueryHandler(IProductRepository repository)
+        public GetProductByIdQueryHandler(AppDbContext context)
         {
-            _repository = repository;
+            _context = context;
         }
 
         public async Task<Response> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
@@ -21,7 +23,10 @@ namespace IntercambioGenebraAPI.Application.Queries.GetProduct
 
             try
             {
-                var product = await _repository.GetProductByIdAsync(request.Id);
+                var product = await _context
+                    .Products
+                    .Include(product => product.Category)
+                    .FirstOrDefaultAsync(product => product.Id == request.Id);
 
                 if (product == null)
                 {
