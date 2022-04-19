@@ -47,6 +47,17 @@ namespace IntercambioGenebraAPI.Tests.Application.Commands
         }
 
         [Fact]
+        public async Task Handle_ShouldReturnNotFound_IfCategoryDoesNotExist()
+        {
+            var categoryId = new Guid();
+            var command = new DeleteCategoryCommand(categoryId);
+            var handler = new DeleteCategoryCommandHandler(_categoryRepository);
+            var response = await handler.Handle(command, CancellationToken.None);
+
+            response.GetResult().Should().BeOfType<NotFoundObjectResult>();
+        }
+
+        [Fact]
         public async Task Handle_ShouldReturnUnprocessableEntity_IfCategoryHasProductsAssociatedWithIt()
         {
             var category = CategoryFactory.CreateTestCategoryWithProduct(_categoryRepository, _productRepository);
