@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FluentAssertions;
 using IntercambioGenebraAPI.Application.Commands.UpdateProduct;
-using IntercambioGenebraAPI.Domain.Entities;
 using IntercambioGenebraAPI.Domain.MapperProfiles;
 using IntercambioGenebraAPI.Domain.Repositories;
 using IntercambioGenebraAPI.Infrastructure;

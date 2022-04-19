@@ -1,6 +1,6 @@
-﻿using Xunit;
-using FluentAssertions;
+﻿using FluentAssertions;
 using IntercambioGenebraAPI.Domain.Entities;
+using Xunit;
 
 namespace IntercambioGenebraAPI.Tests.Domain.Entities
 {

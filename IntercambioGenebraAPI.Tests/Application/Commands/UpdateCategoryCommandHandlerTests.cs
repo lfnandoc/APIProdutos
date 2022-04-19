@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using IntercambioGenebraAPI.Application.Commands.UpdateCategory;
-using IntercambioGenebraAPI.Domain.Entities;
 using IntercambioGenebraAPI.Domain.Repositories;
 using IntercambioGenebraAPI.Infrastructure;
 using IntercambioGenebraAPI.Infrastructure.Repositories;

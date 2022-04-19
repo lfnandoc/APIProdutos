@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
-using IntercambioGenebraAPI.Application.Commands.UpdateCategory;
 using IntercambioGenebraAPI.Application.Queries.GetAllCategories;
 using IntercambioGenebraAPI.Domain.Entities;
-using IntercambioGenebraAPI.Domain.Repositories;
 using IntercambioGenebraAPI.Infrastructure;
-using IntercambioGenebraAPI.Infrastructure.Repositories;
 using IntercambioGenebraAPI.Tests.Utils.Factories;
 using IntercambioGenebraAPI.Tests.Utils.Factories.Entities;
 using Microsoft.AspNetCore.Mvc;

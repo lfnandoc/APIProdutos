@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using IntercambioGenebraAPI.Application.Mediator;
 using IntercambioGenebraAPI.Domain.Entities;
-using IntercambioGenebraAPI.Domain.Repositories;
 using IntercambioGenebraAPI.Domain.ViewModels;
 using IntercambioGenebraAPI.Infrastructure;
 using MediatR;
