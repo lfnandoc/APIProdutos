@@ -33,22 +33,12 @@ namespace IntercambioGenebraAPI.Tests.Application.Commands
             _mapper = ConfigMapper().CreateMapper();
         }
 
-        public Category SetupTestCategory()
-        {
-            const string testCategoryName = "Software";
-            var testCategory = new Category(testCategoryName);
-            _categoryRepository.Insert(testCategory);
-            _categoryRepository.Save();
-
-            return testCategory;
-        }
-
         [Fact]
         public async Task Handle_ShouldCreateProduct()
         {
             const string testProductName = "Visual Studio";
             const decimal testProductPrice = 10.85m;
-            var category = SetupTestCategory();
+            var category = CategoryFactory.CreateTestCategory(_categoryRepository);
 
             var command = new CreateProductCommand() 
             { 
@@ -76,7 +66,7 @@ namespace IntercambioGenebraAPI.Tests.Application.Commands
         public async Task Handle_ShouldCreateProductWithPriceZero_IfPriceNotProvided()
         {
             const string testProductName = "Visual Studio";
-            var category = SetupTestCategory();
+            var category = CategoryFactory.CreateTestCategory(_categoryRepository);
 
             var command = new CreateProductCommand()
             {
@@ -102,7 +92,7 @@ namespace IntercambioGenebraAPI.Tests.Application.Commands
         {
             const string testProductName = "";
             const decimal testProductPrice = 10.85m;
-            var category = SetupTestCategory();
+            var category = CategoryFactory.CreateTestCategory(_categoryRepository);
 
             var command = new CreateProductCommand()
             {
@@ -141,7 +131,7 @@ namespace IntercambioGenebraAPI.Tests.Application.Commands
         {
             const string testProductName = "Visual Studio";
             const decimal testProductPrice = -5m;
-            var category = SetupTestCategory();
+            var category = CategoryFactory.CreateTestCategory(_categoryRepository);
 
             var command = new CreateProductCommand()
             {
