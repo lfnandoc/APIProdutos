@@ -19,20 +19,18 @@ namespace IntercambioGenebraAPI.Tests.Application.Commands
     public class DeleteCategoryCommandHandlerTests
     {
         private readonly ICategoryRepository _categoryRepository;
-        private readonly IProductRepository _productRepository;
         private readonly AppDbContext _context;
 
         public DeleteCategoryCommandHandlerTests()
         {
             _context = InMemoryContextFactory.Create();
             _categoryRepository = new CategoryRepository(_context);
-            _productRepository = new ProductRepository(_context);
         }
 
         [Fact]
         public async Task Handle_ShouldDeleteCategory()
         {
-            var category = CategoryFactory.CreateTestCategory(_categoryRepository);
+            var category = CategoryFactory.CreateTestCategory(_context);
             var categoryId = category.Id;
             var command = new DeleteCategoryCommand(categoryId);
             var handler = new DeleteCategoryCommandHandler(_categoryRepository);
@@ -59,7 +57,7 @@ namespace IntercambioGenebraAPI.Tests.Application.Commands
         [Fact]
         public async Task Handle_ShouldReturnUnprocessableEntity_IfCategoryHasProductsAssociatedWithIt()
         {
-            var category = CategoryFactory.CreateTestCategoryWithProduct(_categoryRepository, _productRepository);
+            var category = CategoryFactory.CreateTestCategoryWithProduct(_context);
             var categoryId = category.Id;
             var command = new DeleteCategoryCommand(categoryId);
             var handler = new DeleteCategoryCommandHandler(_categoryRepository);

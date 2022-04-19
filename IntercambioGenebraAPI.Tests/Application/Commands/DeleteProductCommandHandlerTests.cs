@@ -19,20 +19,18 @@ namespace IntercambioGenebraAPI.Tests.Application.Commands
     public class DeleteProductCommandHandlerTests
     {
         private readonly IProductRepository _productRepository;
-        private readonly ICategoryRepository _categoryRepository;
         private readonly AppDbContext _context;
 
         public DeleteProductCommandHandlerTests()
         {
             _context = InMemoryContextFactory.Create();
             _productRepository = new ProductRepository(_context);
-            _categoryRepository = new CategoryRepository(_context);
         }
 
         [Fact]
         public async Task Handle_ShouldDeleteProduct()
         {
-            var product = ProductFactory.CreateTestProduct(_productRepository, _categoryRepository);
+            var product = ProductFactory.CreateTestProduct(_context);
             var productId = product.Id;
             var command = new DeleteProductCommand(productId);
             var handler = new DeleteProductCommandHandler(_productRepository);

@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IntercambioGenebraAPI.Domain.Entities;
-using IntercambioGenebraAPI.Domain.Repositories;
+﻿using IntercambioGenebraAPI.Domain.Entities;
+using IntercambioGenebraAPI.Infrastructure;
+using IntercambioGenebraAPI.Infrastructure.Repositories;
 
 namespace IntercambioGenebraAPI.Tests.Utils.Factories
 {
     public static class CategoryFactory
     {
-        public static Category CreateTestCategory(ICategoryRepository _categoryRepository)
+        public static Category CreateTestCategory(AppDbContext _context)
         {
+            var _categoryRepository = new CategoryRepository(_context);
             const string testCategoryName = "Software";
             var testCategory = new Category(testCategoryName);
             
@@ -20,8 +17,10 @@ namespace IntercambioGenebraAPI.Tests.Utils.Factories
 
             return testCategory;
         }
-        public static Category CreateTestCategoryWithProduct(ICategoryRepository _categoryRepository, IProductRepository _productRepository)
+        public static Category CreateTestCategoryWithProduct(AppDbContext _context)
         {
+            var _categoryRepository = new CategoryRepository(_context);
+            var _productRepository = new ProductRepository(_context);
             const string testCategoryName = "Software";
             var testCategory = new Category(testCategoryName);
             

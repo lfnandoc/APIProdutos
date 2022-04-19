@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IntercambioGenebraAPI.Domain.Entities;
-using IntercambioGenebraAPI.Domain.Repositories;
+﻿using IntercambioGenebraAPI.Domain.Entities;
+using IntercambioGenebraAPI.Infrastructure;
+using IntercambioGenebraAPI.Infrastructure.Repositories;
 
 namespace IntercambioGenebraAPI.Tests.Utils.Factories
 {
     public static class ProductFactory
     {
-        public static Product CreateTestProduct(IProductRepository _productRepository, ICategoryRepository _categoryRepository)
+        public static Product CreateTestProduct(AppDbContext _context)
         {
+            var _productRepository = new ProductRepository(_context);
             const string testProductName = "";
             const decimal testProductPrice = 10.85m;
-            var testCategory = CategoryFactory.CreateTestCategory(_categoryRepository);
+            var testCategory = CategoryFactory.CreateTestCategory(_context);
             var testProduct = new Product(testProductName, testCategory, testProductPrice);
             
             _productRepository.Insert(testProduct);

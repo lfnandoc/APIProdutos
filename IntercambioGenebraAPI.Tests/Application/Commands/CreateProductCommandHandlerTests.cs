@@ -38,7 +38,7 @@ namespace IntercambioGenebraAPI.Tests.Application.Commands
         {
             const string testProductName = "Visual Studio";
             const decimal testProductPrice = 10.85m;
-            var category = CategoryFactory.CreateTestCategory(_categoryRepository);
+            var category = CategoryFactory.CreateTestCategory(_context);
 
             var command = new CreateProductCommand() 
             { 
@@ -66,7 +66,7 @@ namespace IntercambioGenebraAPI.Tests.Application.Commands
         public async Task Handle_ShouldCreateProductWithPriceZero_IfPriceNotProvided()
         {
             const string testProductName = "Visual Studio";
-            var category = CategoryFactory.CreateTestCategory(_categoryRepository);
+            var category = CategoryFactory.CreateTestCategory(_context);
 
             var command = new CreateProductCommand()
             {
@@ -92,7 +92,7 @@ namespace IntercambioGenebraAPI.Tests.Application.Commands
         {
             const string testProductName = "";
             const decimal testProductPrice = 10.85m;
-            var category = CategoryFactory.CreateTestCategory(_categoryRepository);
+            var category = CategoryFactory.CreateTestCategory(_context);
 
             var command = new CreateProductCommand()
             {
@@ -131,7 +131,7 @@ namespace IntercambioGenebraAPI.Tests.Application.Commands
         {
             const string testProductName = "Visual Studio";
             const decimal testProductPrice = -5m;
-            var category = CategoryFactory.CreateTestCategory(_categoryRepository);
+            var category = CategoryFactory.CreateTestCategory(_context);
 
             var command = new CreateProductCommand()
             {
