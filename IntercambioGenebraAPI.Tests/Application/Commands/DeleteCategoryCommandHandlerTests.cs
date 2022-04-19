@@ -54,7 +54,10 @@ namespace IntercambioGenebraAPI.Tests.Application.Commands
         [Fact]
         public async Task Handle_ShouldReturnUnprocessableEntity_IfCategoryHasProductsAssociatedWithIt()
         {
-            var category = CategoryFactory.CreateTestCategoryWithProduct(_context);
+            var category = CategoryFactory.CreateTestCategory(_context);
+            
+            ProductFactory.CreateTestProductOfCategory(_context, category);
+            
             var categoryId = category.Id;
             var command = new DeleteCategoryCommand(categoryId);
             var handler = new DeleteCategoryCommandHandler(_categoryRepository);

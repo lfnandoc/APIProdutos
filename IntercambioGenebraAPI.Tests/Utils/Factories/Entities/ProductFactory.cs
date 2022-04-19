@@ -15,6 +15,18 @@ namespace IntercambioGenebraAPI.Tests.Utils.Factories.Entities
             
             _productRepository.Insert(testProduct);
             _productRepository.Save();
+            
+            return testProduct;
+        }
+        
+        public static Product CreateTestProductOfCategory(AppDbContext _context, Category category, string testProductName = "Visual Studio")
+        {
+            var _productRepository = new ProductRepository(_context);
+            const decimal testProductPrice = 10.85m;
+            var testProduct = new Product(testProductName, category, testProductPrice);
+
+            _productRepository.Insert(testProduct);
+            _productRepository.Save();
 
             return testProduct;
         }

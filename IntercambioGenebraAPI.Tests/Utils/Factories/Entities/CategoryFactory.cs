@@ -16,16 +16,5 @@ namespace IntercambioGenebraAPI.Tests.Utils.Factories.Entities
 
             return testCategory;
         }
-        public static Category CreateTestCategoryWithProduct(AppDbContext _context, string testCategoryName = "Software", string testProductName = "Visual Studio")
-        {
-            var _productRepository = new ProductRepository(_context);
-            var testCategory = CreateTestCategory(_context, testCategoryName);
-            var testProduct = new Product(testProductName, testCategory);
-            
-            _productRepository.Insert(testProduct);
-            _productRepository.Save();
-
-            return testCategory;
-        }
     }
 }
