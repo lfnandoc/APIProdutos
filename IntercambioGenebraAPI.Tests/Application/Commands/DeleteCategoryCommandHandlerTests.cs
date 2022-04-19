@@ -13,6 +13,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using IntercambioGenebraAPI.Domain.Entities;
 using IntercambioGenebraAPI.Application.Commands.DeleteCategory;
+using IntercambioGenebraAPI.Tests.Utils.Factories.Entities;
 
 namespace IntercambioGenebraAPI.Tests.Application.Commands
 {

@@ -14,6 +14,7 @@ using IntercambioGenebraAPI.Domain.Entities;
 using AutoMapper;
 using IntercambioGenebraAPI.Domain.ViewModels;
 using System;
+using IntercambioGenebraAPI.Tests.Utils.Factories.Entities;
 
 namespace IntercambioGenebraAPI.Tests.Application.Commands
 {

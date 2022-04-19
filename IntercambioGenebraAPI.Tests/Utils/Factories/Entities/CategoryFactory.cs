@@ -2,7 +2,7 @@
 using IntercambioGenebraAPI.Infrastructure;
 using IntercambioGenebraAPI.Infrastructure.Repositories;
 
-namespace IntercambioGenebraAPI.Tests.Utils.Factories
+namespace IntercambioGenebraAPI.Tests.Utils.Factories.Entities
 {
     public static class CategoryFactory
     {
