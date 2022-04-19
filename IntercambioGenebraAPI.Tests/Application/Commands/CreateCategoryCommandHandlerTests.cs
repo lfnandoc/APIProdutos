@@ -7,6 +7,7 @@ using IntercambioGenebraAPI.Application.Commands.CreateCategory;
 using Xunit;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Text;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using IntercambioGenebraAPI.Domain.Entities;
@@ -17,6 +18,7 @@ namespace IntercambioGenebraAPI.Tests.Application.Commands
     {
         private readonly ICategoryRepository _categoryRepository;
         private readonly AppDbContext _context;
+
         public CreateCategoryCommandHandlerTests()
         {
             _context = InMemoryContextFactory.Create();
@@ -29,14 +31,14 @@ namespace IntercambioGenebraAPI.Tests.Application.Commands
             const string testCategoryName = "Software";
             var command = new CreateCategoryCommand() { Name = testCategoryName };
             var handler = new CreateCategoryCommandHandler(_categoryRepository);
-            
             var response = await handler.Handle(command, new CancellationToken());
-
             var result = response?.GetResult().As<OkObjectResult>();
             var category = result?.Value.As<Category>();
+
             category.Should().NotBeNull();
 
             var categoryFromDatatabase = await _categoryRepository.GetCategoryByIdAsync(category!.Id);
+            
             categoryFromDatatabase.Should().NotBeNull();
             categoryFromDatatabase!.Name.Should().Be(testCategoryName);
         }
@@ -44,10 +46,11 @@ namespace IntercambioGenebraAPI.Tests.Application.Commands
         [Fact]
         public async Task Handle_ShouldReturnUnprocessableEntity_IfNameIsEmpty()
         {
-            var command = new CreateCategoryCommand() { Name = "" };
+            const string testCategoryName = "";
+            var command = new CreateCategoryCommand() { Name = testCategoryName };
             var handler = new CreateCategoryCommandHandler(_categoryRepository);
-
             var response = await handler.Handle(command, new CancellationToken());
+            
             response.GetResult().Should().BeOfType<UnprocessableEntityObjectResult>();
         }
     }
