@@ -14,6 +14,7 @@ namespace IntercambioGenebraAPI.Tests.Utils.Factories
         {
             const string testCategoryName = "Software";
             var testCategory = new Category(testCategoryName);
+            
             _categoryRepository.Insert(testCategory);
             _categoryRepository.Save();
 
@@ -23,11 +24,13 @@ namespace IntercambioGenebraAPI.Tests.Utils.Factories
         {
             const string testCategoryName = "Software";
             var testCategory = new Category(testCategoryName);
+            
             _categoryRepository.Insert(testCategory);
             _categoryRepository.Save();
 
             const string testProductName = "Visual Studio";
             var testProduct = new Product(testProductName, testCategory);
+            
             _productRepository.Insert(testProduct);
             _productRepository.Save();
 

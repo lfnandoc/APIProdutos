@@ -34,7 +34,6 @@ namespace IntercambioGenebraAPI.Tests.Application.Commands
         {
             var category = CategoryFactory.CreateTestCategory(_categoryRepository);
             var categoryId = category.Id;
-
             var command = new DeleteCategoryCommand(categoryId);
             var handler = new DeleteCategoryCommandHandler(_categoryRepository);
             var response = await handler.Handle(command, CancellationToken.None);
