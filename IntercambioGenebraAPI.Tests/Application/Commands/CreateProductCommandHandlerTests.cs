@@ -126,7 +126,7 @@ namespace IntercambioGenebraAPI.Tests.Application.Commands
         }
 
         [Fact]
-        public async Task Handle_ShouldReturnUnprocessableEntity_IfPriceProvidedIsNegative()
+        public async Task Handle_ShouldReturnUnprocessableEntity_IfPriceIsNegative()
         {
             const string testProductName = "Visual Studio";
             const decimal testProductPrice = -5m;
