@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using IntercambioGenebraAPI.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace IntercambioGenebraAPI.Tests.Utils.Factories
 {

@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
+using FluentAssertions;
+using IntercambioGenebraAPI.Application.Commands.DeleteCategory;
 using IntercambioGenebraAPI.Domain.Repositories;
 using IntercambioGenebraAPI.Infrastructure;
 using IntercambioGenebraAPI.Infrastructure.Repositories;
 using IntercambioGenebraAPI.Tests.Utils.Factories;
-using IntercambioGenebraAPI.Application.Commands.CreateCategory;
-using Xunit;
-using System.Threading.Tasks;
-using System.Linq;
-using System.Text;
-using FluentAssertions;
-using Microsoft.AspNetCore.Mvc;
-using IntercambioGenebraAPI.Domain.Entities;
-using IntercambioGenebraAPI.Application.Commands.DeleteCategory;
 using IntercambioGenebraAPI.Tests.Utils.Factories.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Xunit;
 
 namespace IntercambioGenebraAPI.Tests.Application.Commands
 {

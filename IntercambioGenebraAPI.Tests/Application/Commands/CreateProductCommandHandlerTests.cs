@@ -1,26 +1,24 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
+using FluentAssertions;
+using IntercambioGenebraAPI.Application.Commands.CreateProduct;
+using IntercambioGenebraAPI.Domain.MapperProfiles;
 using IntercambioGenebraAPI.Domain.Repositories;
+using IntercambioGenebraAPI.Domain.ViewModels;
 using IntercambioGenebraAPI.Infrastructure;
 using IntercambioGenebraAPI.Infrastructure.Repositories;
 using IntercambioGenebraAPI.Tests.Utils.Factories;
-using IntercambioGenebraAPI.Application.Commands.CreateProduct;
-using Xunit;
-using System.Threading.Tasks;
-using System.Linq;
-using System.Text;
-using FluentAssertions;
-using Microsoft.AspNetCore.Mvc;
-using IntercambioGenebraAPI.Domain.Entities;
-using AutoMapper;
-using IntercambioGenebraAPI.Domain.ViewModels;
-using System;
 using IntercambioGenebraAPI.Tests.Utils.Factories.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Xunit;
 
 namespace IntercambioGenebraAPI.Tests.Application.Commands
 {
     public class CreateProductCommandHandlerTests
     {
-        private static MapperConfiguration ConfigMapper() => new MapperConfiguration(config => { config.AddProfile<Domain.MapperProfiles.ProductViewModelProfile>(); });
+        private static MapperConfiguration ConfigMapper() => new MapperConfiguration(config => { config.AddProfile<ProductViewModelProfile>(); });
         private readonly ICategoryRepository _categoryRepository;
         private readonly IProductRepository _productRepository;
         private readonly AppDbContext _context;

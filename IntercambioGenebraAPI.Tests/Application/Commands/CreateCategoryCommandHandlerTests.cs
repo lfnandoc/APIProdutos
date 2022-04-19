@@ -1,16 +1,14 @@
 ﻿using System.Threading;
+using System.Threading.Tasks;
+using FluentAssertions;
+using IntercambioGenebraAPI.Application.Commands.CreateCategory;
+using IntercambioGenebraAPI.Domain.Entities;
 using IntercambioGenebraAPI.Domain.Repositories;
 using IntercambioGenebraAPI.Infrastructure;
 using IntercambioGenebraAPI.Infrastructure.Repositories;
 using IntercambioGenebraAPI.Tests.Utils.Factories;
-using IntercambioGenebraAPI.Application.Commands.CreateCategory;
-using Xunit;
-using System.Threading.Tasks;
-using System.Linq;
-using System.Text;
-using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
-using IntercambioGenebraAPI.Domain.Entities;
+using Xunit;
 
 namespace IntercambioGenebraAPI.Tests.Application.Commands
 {
