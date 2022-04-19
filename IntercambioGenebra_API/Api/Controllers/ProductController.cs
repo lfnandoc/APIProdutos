@@ -27,7 +27,7 @@ namespace IntercambioGenebraAPI.Api.Controllers
             var query = new GetAllProductsQuery();
             var response = await _mediator.Send(query);
 
-            return response.Result;
+            return response.GetResult();
         }
 
 
@@ -38,20 +38,15 @@ namespace IntercambioGenebraAPI.Api.Controllers
             var query = new GetProductByIdQuery(id);
             var response = await _mediator.Send(query);
 
-            return response.Result;
+            return response.GetResult();
         }
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateProductCommand command)
         {
             var response = await _mediator.Send(command);
-
-            if (response.Errors.Any())
-            {
-                return UnprocessableEntity(response.Errors);
-            }
-
-            return response.Result;
+            
+            return response.GetResult();
         }
 
         [HttpPut]
@@ -59,18 +54,11 @@ namespace IntercambioGenebraAPI.Api.Controllers
         public async Task<IActionResult> Put([FromBody] UpdateProductCommand command, [FromRoute] Guid id)
         {
             if (command.Id != id)
-            {
-                return UnprocessableEntity("Ids doesn't match.");
-            }
+                return UnprocessableEntity("Ids doesn't match."); 
 
             var response = await _mediator.Send(command);
-
-            if (response.Errors.Any())
-            {
-                return UnprocessableEntity(response.Errors);
-            }
-
-            return response.Result;
+            
+            return response.GetResult();
         }
 
         [HttpDelete]
@@ -78,15 +66,9 @@ namespace IntercambioGenebraAPI.Api.Controllers
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             var command = new DeleteProductCommand(id);
-
             var response = await _mediator.Send(command);
 
-            if (response.Errors.Any())
-            {
-                return UnprocessableEntity(response.Errors);
-            }
-
-            return response.Result;
+            return response.GetResult();
         }
     }
 }
