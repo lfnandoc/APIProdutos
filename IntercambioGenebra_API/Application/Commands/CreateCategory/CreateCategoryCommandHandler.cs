@@ -24,7 +24,6 @@ namespace IntercambioGenebraAPI.Application.Commands.CreateCategory
             if (!validationResult.IsValid)
             {
                 validationResult.Errors.ForEach(error => response.Errors.Add(error.ErrorMessage));
-                response.Result = new UnprocessableEntityObjectResult(response.Errors);
                 return response;
             }
 

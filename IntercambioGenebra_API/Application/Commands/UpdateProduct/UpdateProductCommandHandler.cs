@@ -31,7 +31,6 @@ namespace IntercambioGenebraAPI.Application.Commands.UpdateProduct
             if (!validationResult.IsValid)
             {
                 validationResult.Errors.ForEach(error => response.Errors.Add(error.ErrorMessage));
-                response.Result = new UnprocessableEntityObjectResult(response.Errors);
                 return response;
             }
 
@@ -51,7 +50,7 @@ namespace IntercambioGenebraAPI.Application.Commands.UpdateProduct
 
                     if (category == null)
                     {
-                        response.Result = new UnprocessableEntityObjectResult("Category not found.");
+                        response.Errors.Add("Category not found.");
                         return response;
                     }
 
