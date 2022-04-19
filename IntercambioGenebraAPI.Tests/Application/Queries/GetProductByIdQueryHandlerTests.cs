@@ -37,6 +37,22 @@ namespace IntercambioGenebraAPI.Tests.Application.Queries
         }
 
         [Fact]
+        public async Task Handle_ShouldReturnProductViewModelWithItsCategoryName()
+        {
+            var testCategory = CategoryFactory.CreateTestCategory(_context, "Category1");
+            var testProduct = ProductFactory.CreateTestProductOfCategory(_context, testCategory);
+            var testProductId = testProduct.Id;
+            var query = new GetProductByIdQuery(testProductId);
+            var handler = new GetProductByIdQueryHandler(_context);
+            var response = await handler.Handle(query, CancellationToken.None);
+            var result = response?.GetResult().As<OkObjectResult>();
+            var product = result?.Value.As<ProductViewModel>();
+
+            product.Should().NotBeNull();
+            product!.CategoryName.Should().Be(testCategory.Name);
+        }
+
+        [Fact]
         public async Task Handle_ShouldReturnNotFound_IfProductDoesNotExist()
         {
             var testProductId = new Guid();
