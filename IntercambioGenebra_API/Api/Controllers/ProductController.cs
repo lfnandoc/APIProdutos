@@ -48,7 +48,7 @@ namespace IntercambioGenebraAPI.Api.Controllers
 
             if (response.Errors.Any())
             {
-                return BadRequest(response.Errors);
+                return UnprocessableEntity(response.Errors);
             }
 
             return response.Result;
@@ -67,7 +67,7 @@ namespace IntercambioGenebraAPI.Api.Controllers
 
             if (response.Errors.Any())
             {
-                return BadRequest(response.Errors);
+                return UnprocessableEntity(response.Errors);
             }
 
             return response.Result;
@@ -83,7 +83,7 @@ namespace IntercambioGenebraAPI.Api.Controllers
 
             if (response.Errors.Any())
             {
-                return BadRequest(response.Errors);
+                return UnprocessableEntity(response.Errors);
             }
 
             return response.Result;

@@ -32,7 +32,7 @@ namespace IntercambioGenebraAPI.Application.Queries.GetAllProducts
             }
             catch (Exception exception)
             {
-                response.Result = new BadRequestObjectResult(exception.Message);
+                response.Result = new UnprocessableEntityObjectResult(exception.Message);
             }
 
             return response;

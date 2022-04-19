@@ -32,7 +32,7 @@ namespace IntercambioGenebraAPI.Application.Commands.DeleteCategory
                 if (categoryHasAssociatedProducts)
                 {
                     response.Result =
-                        new BadRequestObjectResult(
+                        new UnprocessableEntityObjectResult(
                             "Category could not be deleted because it has products associated with it.");
                     return response;
                 }

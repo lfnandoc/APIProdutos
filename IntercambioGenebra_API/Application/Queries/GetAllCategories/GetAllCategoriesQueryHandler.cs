@@ -25,7 +25,7 @@ namespace IntercambioGenebraAPI.Application.Queries.GetAllCategories
             }
             catch (Exception exception)
             {
-                response.Result = new BadRequestObjectResult(exception.Message);
+                response.Result = new UnprocessableEntityObjectResult(exception.Message);
             }
 
             return response;
