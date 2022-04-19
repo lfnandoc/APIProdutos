@@ -32,10 +32,10 @@ namespace IntercambioGenebraAPI.Api.Controllers
 
 
         [HttpGet]
-        [Route("{id}")]
-        public async Task<IActionResult> Get([FromRoute] Guid id)
+        [Route("{productId:Guid}")]
+        public async Task<IActionResult> Get([FromRoute] Guid productId)
         {
-            var query = new GetProductByIdQuery(id);
+            var query = new GetProductByIdQuery(productId);
             var response = await _mediator.Send(query);
 
             return response.GetResult();
@@ -50,10 +50,10 @@ namespace IntercambioGenebraAPI.Api.Controllers
         }
 
         [HttpPut]
-        [Route("{id}")]
-        public async Task<IActionResult> Put([FromBody] UpdateProductCommand command, [FromRoute] Guid id)
+        [Route("{productId:Guid}")]
+        public async Task<IActionResult> Put([FromBody] UpdateProductCommand command, [FromRoute] Guid productId)
         {
-            if (command.Id != id)
+            if (command.Id != productId)
                 return UnprocessableEntity("Ids doesn't match."); 
 
             var response = await _mediator.Send(command);
@@ -62,10 +62,10 @@ namespace IntercambioGenebraAPI.Api.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
-        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        [Route("{productId:Guid}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid productId)
         {
-            var command = new DeleteProductCommand(id);
+            var command = new DeleteProductCommand(productId);
             var response = await _mediator.Send(command);
 
             return response.GetResult();

@@ -32,20 +32,20 @@ namespace IntercambioGenebraAPI.Api.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public async Task<IActionResult> Get([FromRoute] Guid id)
+        [Route("{categoryId:Guid}")]
+        public async Task<IActionResult> Get([FromRoute] Guid categoryId)
         {
-            var query = new GetCategoryByIdQuery(id);
+            var query = new GetCategoryByIdQuery(categoryId);
             var response = await _mediator.Send(query);
 
             return response.GetResult();
         }
 
         [HttpGet]
-        [Route("{id}/products")]
-        public async Task<IActionResult> GetProducts([FromRoute] Guid id)
+        [Route("{categoryId:Guid}/products")]
+        public async Task<IActionResult> GetProducts([FromRoute] Guid categoryId)
         {
-            var query = new GetProductsByCategoryIdQuery(id);
+            var query = new GetProductsByCategoryIdQuery(categoryId);
             var response = await _mediator.Send(query);
 
             return response.GetResult();
@@ -60,10 +60,10 @@ namespace IntercambioGenebraAPI.Api.Controllers
         }
 
         [HttpPut]
-        [Route("{id}")]
-        public async Task<IActionResult> Put([FromBody] UpdateCategoryCommand command, [FromRoute] Guid id)
+        [Route("{categoryId:Guid}")]
+        public async Task<IActionResult> Put([FromBody] UpdateCategoryCommand command, [FromRoute] Guid categoryId)
         {
-            if (command.Id != id)
+            if (command.Id != categoryId)
                 return UnprocessableEntity("Ids doesn't match.");
 
             var response = await _mediator.Send(command);
@@ -72,10 +72,10 @@ namespace IntercambioGenebraAPI.Api.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
-        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        [Route("{categoryId:Guid}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid categoryId)
         {
-            var command = new DeleteCategoryCommand(id);
+            var command = new DeleteCategoryCommand(categoryId);
             var response = await _mediator.Send(command);
 
             return response.GetResult();
