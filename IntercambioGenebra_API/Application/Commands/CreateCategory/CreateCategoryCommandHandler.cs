@@ -29,11 +29,7 @@ namespace IntercambioGenebraAPI.Application.Commands.CreateCategory
 
             try
             {
-                var category = new Category
-                {
-                    Name = request.Name
-                };
-
+                var category = new Category(request.Name);
                 _repository.Insert(category);
                 _repository.Save();
                 response.Result = new OkObjectResult(category);

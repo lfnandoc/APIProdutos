@@ -54,21 +54,18 @@ namespace IntercambioGenebraAPI.Application.Commands.UpdateProduct
                         return response;
                     }
 
-                    product.CategoryId = category.Id;
-                    product.Category = category;
+                    product.ChangeCategory(category);
                 }
 
                 if (request.Name != null)
-                {
-                    product.Name = request.Name;
-                }
+                    product.ChangeName(request.Name);
+                
 
                 if (request.Price != null)
-                {
-                    product.Price = (decimal) request.Price;
-                }
+                    product.ChangePrice(request.Price);
 
                 _repository.Save();
+
                 var productViewModel = _mapper.Map<Product, ProductViewModel>(product);
                 response.Result = new OkObjectResult(productViewModel);
             }

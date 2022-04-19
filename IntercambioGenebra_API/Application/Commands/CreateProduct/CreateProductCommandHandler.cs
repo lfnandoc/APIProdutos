@@ -44,13 +44,7 @@ namespace IntercambioGenebraAPI.Application.Commands.CreateProduct
                     return response;
                 }
 
-                var product = new Product
-                {
-                    Name = request.Name,
-                    Price = request.Price ?? 0,
-                    CategoryId = category.Id,
-                    Category = category
-                };
+                var product = new Product(request.Name, category, request.Price);
 
                 _repository.Insert(product);
                 _repository.Save();

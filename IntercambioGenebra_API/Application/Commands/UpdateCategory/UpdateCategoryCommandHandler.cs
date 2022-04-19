@@ -36,7 +36,7 @@ namespace IntercambioGenebraAPI.Application.Commands.UpdateCategory
                     return response;
                 }
 
-                category.Name = request.Name;
+                category.ChangeName(request.Name);
                 _repository.Save();
 
                 response.Result = new OkObjectResult(category);
