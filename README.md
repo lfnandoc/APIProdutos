@@ -20,3 +20,6 @@ Endpoints para:
 - Obter produtos por ID de categoria
 
 ![image](https://user-images.githubusercontent.com/82987034/163399926-66b1564c-2c5f-45e9-9378-0972c915c5ae.png)
+
+![image](https://user-images.githubusercontent.com/82987034/164226288-ce6cb29f-abac-43a1-b954-8168d2255efd.png)
+
