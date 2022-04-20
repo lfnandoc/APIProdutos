@@ -24,17 +24,12 @@ namespace IntercambioGenebraAPI.Application.Commands.CreateCategory
             if (!validationResult.IsValid)
             {
                 validationResult.Errors.ForEach(error => response.Errors.Add(error.ErrorMessage));
-                response.Result = new BadRequestObjectResult(response.Errors);
                 return response;
             }
 
             try
             {
-                var category = new Category
-                {
-                    Name = request.Name
-                };
-
+                var category = new Category(request.Name);
                 _repository.Insert(category);
                 _repository.Save();
                 response.Result = new OkObjectResult(category);

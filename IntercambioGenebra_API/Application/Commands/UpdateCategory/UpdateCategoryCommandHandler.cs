@@ -23,7 +23,6 @@ namespace IntercambioGenebraAPI.Application.Commands.UpdateCategory
             if (!validationResult.IsValid)
             {
                 validationResult.Errors.ForEach(error => response.Errors.Add(error.ErrorMessage));
-                response.Result = new BadRequestObjectResult(response.Errors);
                 return response;
             }
 
@@ -37,7 +36,7 @@ namespace IntercambioGenebraAPI.Application.Commands.UpdateCategory
                     return response;
                 }
 
-                category.Name = request.Name;
+                category.ChangeName(request.Name);
                 _repository.Save();
 
                 response.Result = new OkObjectResult(category);

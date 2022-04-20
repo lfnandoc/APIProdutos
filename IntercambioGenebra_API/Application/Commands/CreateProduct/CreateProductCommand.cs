@@ -21,7 +21,7 @@ namespace IntercambioGenebraAPI.Application.Commands.CreateProduct
 
             RuleFor(command => command.CategoryId)
                 .NotEmpty()
-                .WithMessage("Product is required.");
+                .WithMessage("Category is required.");
 
             When(command => command.Price != null, () =>
             {

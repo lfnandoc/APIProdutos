@@ -27,66 +27,48 @@ namespace IntercambioGenebraAPI.Api.Controllers
             var query = new GetAllProductsQuery();
             var response = await _mediator.Send(query);
 
-            return response.Result;
+            return response.GetResult();
         }
 
 
         [HttpGet]
-        [Route("{id}")]
-        public async Task<IActionResult> Get([FromRoute] Guid id)
+        [Route("{productId:Guid}")]
+        public async Task<IActionResult> Get([FromRoute] Guid productId)
         {
-            var query = new GetProductByIdQuery(id);
+            var query = new GetProductByIdQuery(productId);
             var response = await _mediator.Send(query);
 
-            return response.Result;
+            return response.GetResult();
         }
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateProductCommand command)
         {
             var response = await _mediator.Send(command);
-
-            if (response.Errors.Any())
-            {
-                return BadRequest(response.Errors);
-            }
-
-            return response.Result;
+            
+            return response.GetResult();
         }
 
         [HttpPut]
-        [Route("{id}")]
-        public async Task<IActionResult> Put([FromBody] UpdateProductCommand command, [FromRoute] Guid id)
+        [Route("{productId:Guid}")]
+        public async Task<IActionResult> Put([FromBody] UpdateProductCommand command, [FromRoute] Guid productId)
         {
-            if (command.Id != id)
-            {
-                return UnprocessableEntity("Ids doesn't match.");
-            }
+            if (command.Id != productId)
+                return UnprocessableEntity("Ids doesn't match."); 
 
             var response = await _mediator.Send(command);
-
-            if (response.Errors.Any())
-            {
-                return BadRequest(response.Errors);
-            }
-
-            return response.Result;
+            
+            return response.GetResult();
         }
 
         [HttpDelete]
-        [Route("{id}")]
-        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        [Route("{productId:Guid}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid productId)
         {
-            var command = new DeleteProductCommand(id);
-
+            var command = new DeleteProductCommand(productId);
             var response = await _mediator.Send(command);
 
-            if (response.Errors.Any())
-            {
-                return BadRequest(response.Errors);
-            }
-
-            return response.Result;
+            return response.GetResult();
         }
     }
 }

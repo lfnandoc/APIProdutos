@@ -28,75 +28,57 @@ namespace IntercambioGenebraAPI.Api.Controllers
             var query = new GetAllCategoriesQuery();
             var response = await _mediator.Send(query);
 
-            return response.Result;
+            return response.GetResult();
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public async Task<IActionResult> Get([FromRoute] Guid id)
+        [Route("{categoryId:Guid}")]
+        public async Task<IActionResult> Get([FromRoute] Guid categoryId)
         {
-            var query = new GetCategoryByIdQuery(id);
+            var query = new GetCategoryByIdQuery(categoryId);
             var response = await _mediator.Send(query);
 
-            return response.Result;
+            return response.GetResult();
         }
 
         [HttpGet]
-        [Route("{id}/products")]
-        public async Task<IActionResult> GetProducts([FromRoute] Guid id)
+        [Route("{categoryId:Guid}/products")]
+        public async Task<IActionResult> GetProducts([FromRoute] Guid categoryId)
         {
-            var query = new GetProductsByCategoryIdQuery(id);
+            var query = new GetProductsByCategoryIdQuery(categoryId);
             var response = await _mediator.Send(query);
 
-            return response.Result;
+            return response.GetResult();
         }
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateCategoryCommand command)
         {
             var response = await _mediator.Send(command);
-
-            if (response.Errors.Any())
-            {
-                return BadRequest(response.Errors);
-            }
-
-            return response.Result;
+            
+            return response.GetResult();
         }
 
         [HttpPut]
-        [Route("{id}")]
-        public async Task<IActionResult> Put([FromBody] UpdateCategoryCommand command, [FromRoute] Guid id)
+        [Route("{categoryId:Guid}")]
+        public async Task<IActionResult> Put([FromBody] UpdateCategoryCommand command, [FromRoute] Guid categoryId)
         {
-            if (command.Id != id)
-            {
+            if (command.Id != categoryId)
                 return UnprocessableEntity("Ids doesn't match.");
-            }
 
             var response = await _mediator.Send(command);
-
-            if (response.Errors.Any())
-            {
-                return BadRequest(response.Errors);
-            }
-
-            return response.Result;
+            
+            return response.GetResult();
         }
 
         [HttpDelete]
-        [Route("{id}")]
-        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        [Route("{categoryId:Guid}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid categoryId)
         {
-            var command = new DeleteCategoryCommand(id);
-
+            var command = new DeleteCategoryCommand(categoryId);
             var response = await _mediator.Send(command);
 
-            if (response.Errors.Any())
-            {
-                return BadRequest(response.Errors);
-            }
-
-            return response.Result;
+            return response.GetResult();
         }
     }
 }

@@ -31,7 +31,6 @@ namespace IntercambioGenebraAPI.Application.Commands.UpdateProduct
             if (!validationResult.IsValid)
             {
                 validationResult.Errors.ForEach(error => response.Errors.Add(error.ErrorMessage));
-                response.Result = new BadRequestObjectResult(response.Errors);
                 return response;
             }
 
@@ -51,25 +50,22 @@ namespace IntercambioGenebraAPI.Application.Commands.UpdateProduct
 
                     if (category == null)
                     {
-                        response.Result = new BadRequestObjectResult("Category not found.");
+                        response.Errors.Add("Category not found.");
                         return response;
                     }
 
-                    product.CategoryId = category.Id;
-                    product.Category = category;
+                    product.ChangeCategory(category);
                 }
 
                 if (request.Name != null)
-                {
-                    product.Name = request.Name;
-                }
+                    product.ChangeName(request.Name);
+                
 
                 if (request.Price != null)
-                {
-                    product.Price = (decimal) request.Price;
-                }
+                    product.ChangePrice(request.Price);
 
                 _repository.Save();
+
                 var productViewModel = _mapper.Map<Product, ProductViewModel>(product);
                 response.Result = new OkObjectResult(productViewModel);
             }

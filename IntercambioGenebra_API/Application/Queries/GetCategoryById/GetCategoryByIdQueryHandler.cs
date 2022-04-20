@@ -1,17 +1,18 @@
 ﻿using IntercambioGenebraAPI.Application.Mediator;
-using IntercambioGenebraAPI.Domain.Repositories;
+using IntercambioGenebraAPI.Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace IntercambioGenebraAPI.Application.Queries.GetCategoryById
 {
     public class GetCategoryByIdQueryHandler : IRequestHandler<GetCategoryByIdQuery, Response>
     {
-        private readonly ICategoryRepository _repository;
+        private readonly AppDbContext _context;
 
-        public GetCategoryByIdQueryHandler(ICategoryRepository repository)
+        public GetCategoryByIdQueryHandler(AppDbContext context)
         {
-            _repository = repository;
+            _context = context;
         }
 
         public async Task<Response> Handle(GetCategoryByIdQuery request, CancellationToken cancellationToken)
@@ -20,7 +21,9 @@ namespace IntercambioGenebraAPI.Application.Queries.GetCategoryById
 
             try
             {
-                var category = await _repository.GetCategoryByIdAsync(request.Id);
+                var category = await _context
+                    .Categories
+                    .FirstOrDefaultAsync(category => category.Id == request.Id);
 
                 if (category == null)
                 {
@@ -32,7 +35,7 @@ namespace IntercambioGenebraAPI.Application.Queries.GetCategoryById
             }
             catch (Exception exception)
             {
-                response.Result = new BadRequestObjectResult(exception.Message);
+                response.Result = new UnprocessableEntityObjectResult(exception.Message);
             }
 
             return response;
