@@ -27,5 +27,5 @@ jobs:
       uses: dorny/test-reporter@v1.5.0
       with:
         name: XUnit Tests
-        path: 'home/runner/work/APIProdutos/APIProdutos/IntercambioGenebraAPI.Tests/TestResults/test-results.trx'
+        path: 'IntercambioGenebraAPI.Tests/TestResults/test-results.trx'
         reporter: dotnet-trx
