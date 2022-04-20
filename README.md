@@ -8,6 +8,7 @@ Utiliza patterns:
 - CQRS
 - DDD
 - Entity Framework
+- XUnit testing com Fluent Assertions
 
 Endpoints para:
 - Cadastro de produtos/categorias
