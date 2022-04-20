@@ -22,10 +22,11 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
-    - name: Upload dotnet test results
-      uses: actions/upload-artifact@v3
+      run: dotnet test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
+    - name: Test Reporter
+      uses: dorny/test-reporter@v1.5.0
       with:
-        name: dotnet-results-${{ matrix.dotnet-version }}
-        path: TestResults-${{ matrix.dotnet-version }}          
-      if: ${{ always() }}
+        artifact: test-results
+        name: XUnit Tests
+        path: '*.xml'
+        reporter: dotnet-trx
