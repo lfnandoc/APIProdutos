@@ -1,5 +1,5 @@
 # APIProdutos
-API de produtos criada para aprendizado
+API de produtos criada para aprendizado. O nome "IntercambioGenebra" é o nome interno do projeto.
 
 Utiliza patterns:
 - Repositories
