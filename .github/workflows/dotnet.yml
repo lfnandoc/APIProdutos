@@ -26,7 +26,6 @@ jobs:
     - name: Test Reporter
       uses: dorny/test-reporter@v1.5.0
       with:
-        artifact: test-results
         name: XUnit Tests
-        path: '/TestResults/*.trx'
+        path: 'TestResults/test-results.trx'
         reporter: dotnet-trx
