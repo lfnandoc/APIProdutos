@@ -28,5 +28,5 @@ jobs:
       with:
         artifact: test-results
         name: XUnit Tests
-        path: '/home/runner/work/APIProdutos/APIProdutos/IntercambioGenebraAPI.Tests/TestResults/test-results.trx'
+        path: '/TestResults/*.trx'
         reporter: dotnet-trx
